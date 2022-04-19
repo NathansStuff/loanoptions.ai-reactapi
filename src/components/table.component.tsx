@@ -5,6 +5,7 @@ const tableRowStyle = 'odd:bg-gray-200'
 const tableDataStyle = 'border border-black p-2'
 
 export default function Table({ data }: { data: University[] }) {
+  console.log('loading table data, with data ' + data.length)
   let index = 0
   return (
     <table className="container text-softBlack">
@@ -20,7 +21,7 @@ export default function Table({ data }: { data: University[] }) {
         </tr>
       </thead>
       <tbody>
-        {data.map((dataRow) => {
+        {data?.map((dataRow) => {
           index += 1
           // Initialise empty object to store rows
           const tableRows: JSX.Element[] = []

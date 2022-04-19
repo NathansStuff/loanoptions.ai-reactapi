@@ -1,4 +1,4 @@
-const data = [
+const hardcodedData = [
   {
     'state-province': null,
     country: 'Australia',
@@ -826,4 +826,4 @@ const data = [
   },
 ]
 
-export default data
+export default hardcodedData
