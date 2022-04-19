@@ -6,8 +6,9 @@ export default function Home() {
   const [data, setData] = useState<University[]>([])
 
   const fetchData = () => {
-    return fetch('http://universities.hipolabs.com/search?country=Australia')
-      .then((response) => response.json())
+    return fetch(
+      'http://universities.hipolabs.com/search?country=Australia'
+    ).then((response) => response.json())
   }
 
   async function loadData() {
@@ -35,7 +36,7 @@ export default function Home() {
 
   return (
     <div className="flex justify-center items-center w-full flex-col space-y-5 p-5">
-      <h1>HomePage</h1>
+      <h1 className='font-softBlack text-xl'>LoanOptions.ai API React</h1>
       <Table data={data} />
       <div className="flex space-x-5">
         <button
