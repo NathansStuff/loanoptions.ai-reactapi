@@ -351,14 +351,7 @@ const data = [
     domains: ['usq.edu.au'],
     alpha_two_code: 'AU',
   },
-  {
-    'state-province': null,
-    country: 'Australia',
-    name: 'University of Sydney',
-    web_pages: ['http://sydney.edu.au/'],
-    domains: ['sydney.edu.au', 'usyd.edu.au', 'uni.sydney.edu.au'],
-    alpha_two_code: 'AU',
-  },
+ 
   {
     'state-province': null,
     country: 'Australia',
