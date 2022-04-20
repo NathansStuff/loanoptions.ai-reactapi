@@ -1,4 +1,4 @@
-import Home from './routes/Home'
+import Home from './pages/Home/Home'
 import { Routes, Route } from 'react-router-dom'
 
 function App() {

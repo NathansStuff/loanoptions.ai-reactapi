@@ -1,35 +1,8 @@
-import {
-  SET_UNIVERSITIES,
-  ADD_UNIVERSITY,
-} from './university.types'
+import { SET_UNIVERSITIES, ADD_UNIVERSITY } from './university.types'
 
+// For first time loading
 const INITIAL_STATE = {
-  universities: [
-    {
-      'state-province': null,
-      country: 'Australia',
-      name: 'Australian Correspondence Schools',
-      web_pages: ['http://www.acs.edu.au/'],
-      domains: ['acs.edu.au'],
-      alpha_two_code: 'AU',
-    },
-    {
-      'state-province': null,
-      country: 'Australia',
-      name: 'Australian Correspondence Schools',
-      web_pages: ['http://www.acs.edu.au/'],
-      domains: ['acs.edu.au'],
-      alpha_two_code: 'AU',
-    },
-    {
-      'state-province': null,
-      country: 'Australia',
-      name: 'Australian Correspondence Schools',
-      web_pages: ['http://www.acs.edu.au/'],
-      domains: ['acs.edu.au'],
-      alpha_two_code: 'AU',
-    },
-  ],
+  universities: [],
 }
 
 export const universityReducer = (state = INITIAL_STATE, action) => {
@@ -37,15 +10,16 @@ export const universityReducer = (state = INITIAL_STATE, action) => {
 
   switch (type) {
     case ADD_UNIVERSITY:
-      console.log('add uni reducer')
       return {
         ...state,
+        // Spread the extra uni
         universities: [...state.universities, { ...payload }],
       }
     case SET_UNIVERSITIES:
       return {
         ...state,
-        universities: payload
+        // Change the whole state at once
+        universities: payload,
       }
     default:
       return state

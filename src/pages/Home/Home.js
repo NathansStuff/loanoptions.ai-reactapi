@@ -1,7 +1,17 @@
-import Table from '../components/table.component'
+import Table from '../../components/table.component'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { addUniversity, setUniversities } from '../redux/University/university.actions'
+import {
+  addUniversity,
+  setUniversities,
+} from '../../redux/University/university.actions'
+
+// Fetch the API data
+function fetchData() {
+  return fetch(
+    'http://universities.hipolabs.com/search?country=Australia'
+  ).then((response) => response.json())
+}
 
 function Home({ universities, addUniversity, setUniversities }) {
   const [data, setData] = useState([])
@@ -11,29 +21,23 @@ function Home({ universities, addUniversity, setUniversities }) {
     setData(universities.universities)
   }, [universities])
 
-  function fetchData() {
-    return fetch(
-      'http://universities.hipolabs.com/search?country=Australia'
-    ).then((response) => response.json())
-  }
-
   async function loadData() {
     const fetchedData = await fetchData()
-    setData(fetchedData)
+    setUniversities(fetchedData)
   }
 
   function deleteData() {
     // remove last element
-    const newData = data.slice(0,-1)
+    const newData = data.slice(0, -1)
     setUniversities(newData)
   }
 
   function addData() {
-    const dataToAdd = data[0]
-    addUniversity(dataToAdd)
-    console.log('add data function')
-    // const newData = [...data, dataToAdd]
-    // setData([...newData])
+    // Check to make sure data exists
+    if (data[0]) {
+      const dataToAdd = data[0]
+      addUniversity(dataToAdd)
+    }
   }
 
   return (
@@ -68,7 +72,7 @@ function Home({ universities, addUniversity, setUniversities }) {
 const mapDispatchToProps = (dispatch) => {
   return {
     addUniversity: (university) => dispatch(addUniversity(university)),
-    setUniversities: (universities) => dispatch(setUniversities(universities))
+    setUniversities: (universities) => dispatch(setUniversities(universities)),
   }
 }
 
