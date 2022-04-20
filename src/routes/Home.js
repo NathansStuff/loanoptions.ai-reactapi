@@ -1,9 +1,17 @@
 import Table from '../components/table.component'
-import { University } from '../types/types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { addUniversity } from '../redux/University/university.actions'
+import { Dispatch } from 'redux'
+import { useDispatch } from 'react-redux'
 
-export default function Home() {
-  const [data, setData] = useState<University[]>([])
+function Home({ universities, addUniversity }) {
+  const [data, setData] = useState([])
+
+  // Rerender the page when the state changes
+  useEffect(() => {
+    setData(universities.universities)
+  }, [universities])
 
   function fetchData() {
     return fetch(
@@ -19,7 +27,7 @@ export default function Home() {
   function deleteData() {
     const newData = data.pop()
     // since .pop() might return undefined, we need to protect it
-    let protectedData: University[]
+    let protectedData
     if (newData === undefined) {
       protectedData = []
     } else {
@@ -30,8 +38,10 @@ export default function Home() {
 
   function addData() {
     const dataToAdd = data[0]
-    const newData = [...data, dataToAdd]
-    setData([...newData])
+    addUniversity(dataToAdd)
+    console.log('add data function')
+    // const newData = [...data, dataToAdd]
+    // setData([...newData])
   }
 
   return (
@@ -53,7 +63,7 @@ export default function Home() {
         </button>
         <button
           className="border shadow bg-4 text-white p-2 rounded-full hover:bg-2 hover:-translate-y-1 transition ease-in-out delay-150"
-          onClick={addData}
+          onClick={() => addData()}
         >
           Add <span className="hidden md:inline"> Data</span>
         </button>
@@ -62,3 +72,16 @@ export default function Home() {
     </div>
   )
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addUniversity: (university) => dispatch(addUniversity(university)),
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    universities: state.universities,
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
