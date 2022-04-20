@@ -35,29 +35,30 @@ export default function Home() {
   }
 
   return (
-    <div className="flex justify-center items-center w-full flex-col space-y-5 p-5">
-      <h1 className='font-softBlack text-xl'>LoanOptions.ai API React</h1>
-      <Table data={data} />
+    <div className="flex justify-center items-center w-full flex-col space-y-5 p-5 z-10">
+      <h1 className="font-softBlack text-xl">LoanOptions.ai API React</h1>
+
       <div className="flex space-x-5">
         <button
           onClick={loadData}
           className="border shadow bg-3 text-white p-2 rounded-full hover:bg-3Dark hover:-translate-y-1 transition ease-in-out delay-150"
         >
-          Load Data
+          Load<span className="hidden md:inline"> Data</span>
         </button>
         <button
-          className="border shadow bg-5 text-white p-2 rounded-full hover:bg-red-500 hover:-translate-y-1 transition ease-in-out delay-150"
+          className="border shadow bg-5 text-white p-2 rounded-full hover:bg-red-500 hover:-translate-y-1 transition ease-in-out delay-150 "
           onClick={deleteData}
         >
-          Delete Data
+          Delete <span className="hidden md:inline"> Data</span>
         </button>
         <button
           className="border shadow bg-4 text-white p-2 rounded-full hover:bg-2 hover:-translate-y-1 transition ease-in-out delay-150"
           onClick={addData}
         >
-          Add Data
+          Add <span className="hidden md:inline"> Data</span>
         </button>
       </div>
+      <Table data={data} />
     </div>
   )
 }

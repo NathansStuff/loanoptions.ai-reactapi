@@ -5,13 +5,14 @@ const tableRowStyle = 'odd:bg-gray-200'
 const tableDataStyle = 'border border-black p-2'
 
 export default function Table({ data }: { data: University[] }) {
-  console.log('loading table data, with data ' + data.length)
   let index = 0
+
   return (
     <table className="container text-softBlack">
       <thead className="bg-blue-4">
         <tr className="">
           {/* Always returns the Table Head even when no data */}
+
           {tableHeaders.map((tableHeader, index) => {
             return (
               <th className={tableDataStyle} key={index}>
