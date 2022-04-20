@@ -1,25 +1,37 @@
 import Table from '../../components/table.component'
 import { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, ConnectedProps } from 'react-redux'
 import {
   addUniversity,
   setUniversities,
 } from '../../redux/University/university.actions'
+import { University } from '../../types/types'
+import { Dispatch } from 'redux';
 
-// Fetch the API data
-function fetchData() {
-  return fetch(
-    'http://universities.hipolabs.com/search?country=Australia'
-  ).then((response) => response.json())
+// Types
+type RootState = {
+  universities: { universities: University[] }
 }
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-function Home({ universities, addUniversity, setUniversities }) {
-  const [data, setData] = useState([])
+function Home({
+  universities,
+  addUniversity,
+  setUniversities,
+}: PropsFromRedux) {
+  const [data, setData] = useState<University[]>([])
 
   // Rerender the page when the state changes
   useEffect(() => {
     setData(universities.universities)
   }, [universities])
+
+  // Fetch the API data
+  function fetchData() {
+    return fetch(
+      'http://universities.hipolabs.com/search?country=Australia'
+    ).then((response) => response.json())
+  }
 
   async function loadData() {
     const fetchedData = await fetchData()
@@ -69,16 +81,21 @@ function Home({ universities, addUniversity, setUniversities }) {
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    addUniversity: (university) => dispatch(addUniversity(university)),
-    setUniversities: (universities) => dispatch(setUniversities(universities)),
+    addUniversity: (university: University) =>
+      dispatch(addUniversity(university)),
+    setUniversities: (universities: University[]) =>
+      dispatch(setUniversities(universities)),
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return {
     universities: state.universities,
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
+export default (connector)(Home)
