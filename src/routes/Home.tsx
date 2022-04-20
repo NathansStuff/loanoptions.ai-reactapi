@@ -5,7 +5,7 @@ import { useState } from 'react'
 export default function Home() {
   const [data, setData] = useState<University[]>([])
 
-  const fetchData = () => {
+  function fetchData() {
     return fetch(
       'http://universities.hipolabs.com/search?country=Australia'
     ).then((response) => response.json())
