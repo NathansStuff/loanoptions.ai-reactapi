@@ -1,7 +1,6 @@
 import {
-  FETCH_UNIVERSITIES,
   ADD_UNIVERSITY,
-  DELETE_UNIVERSITY,
+  SET_UNIVERSITIES,
 } from './university.types'
 
 export const addUniversity = (university) => {
@@ -12,11 +11,9 @@ export const addUniversity = (university) => {
   }
 }
 
-export const deleteUniversity = (university) => {
+export const setUniversities = (universities) => {
   return {
-    type: DELETE_UNIVERSITY,
-    payload: {
-      university: university,
-    },
+    type: SET_UNIVERSITIES,
+    payload: universities,
   }
 }

@@ -1,11 +1,9 @@
 import Table from '../components/table.component'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { addUniversity } from '../redux/University/university.actions'
-import { Dispatch } from 'redux'
-import { useDispatch } from 'react-redux'
+import { addUniversity, setUniversities } from '../redux/University/university.actions'
 
-function Home({ universities, addUniversity }) {
+function Home({ universities, addUniversity, setUniversities }) {
   const [data, setData] = useState([])
 
   // Rerender the page when the state changes
@@ -25,15 +23,9 @@ function Home({ universities, addUniversity }) {
   }
 
   function deleteData() {
-    const newData = data.pop()
-    // since .pop() might return undefined, we need to protect it
-    let protectedData
-    if (newData === undefined) {
-      protectedData = []
-    } else {
-      protectedData = data
-    }
-    setData([...protectedData])
+    // remove last element
+    const newData = data.slice(0,-1)
+    setUniversities(newData)
   }
 
   function addData() {
@@ -76,6 +68,7 @@ function Home({ universities, addUniversity }) {
 const mapDispatchToProps = (dispatch) => {
   return {
     addUniversity: (university) => dispatch(addUniversity(university)),
+    setUniversities: (universities) => dispatch(setUniversities(universities))
   }
 }
 
