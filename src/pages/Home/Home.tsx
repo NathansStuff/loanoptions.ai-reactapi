@@ -81,7 +81,7 @@ function Home({
   )
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+function mapDispatchToProps(dispatch: Dispatch) {
   return {
     addUniversity: (university: University) =>
       dispatch(addUniversity(university)),
@@ -90,7 +90,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-const mapStateToProps = (state: RootState) => {
+function mapStateToProps(state: RootState) {
   return {
     universities: state.universities,
   }

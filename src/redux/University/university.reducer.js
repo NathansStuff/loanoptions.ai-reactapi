@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   universities: [],
 }
 
-export const universityReducer = (state = INITIAL_STATE, action) => {
+export function universityReducer(state = INITIAL_STATE, action) {
   const { type, payload } = action
 
   switch (type) {
