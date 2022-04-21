@@ -24,7 +24,7 @@ export function universityReducer(state = INITIAL_STATE, action: Props) {
     case SET_UNIVERSITIES:
       return {
         ...state,
-        // Change the whole state at once
+        // Change the whole university state at once
         universities: payload,
       }
     default:
