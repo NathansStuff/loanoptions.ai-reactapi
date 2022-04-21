@@ -5,14 +5,15 @@ const tableRowStyle = 'odd:bg-gray-200'
 const tableDataStyle = 'border border-black p-2'
 
 export default function Table({ data }: { data: University[] }) {
+  // Index will become the id since the data doesnt have id
   let index = 0
 
   return (
     <table className="container text-softBlack">
       <thead className="bg-blue-4">
         <tr className="">
-          {/* Always returns the Table Head even when no data */}
 
+          {/* Always returns the Table Head even when no data */}
           {tableHeaders.map((tableHeader, index) => {
             return (
               <th className={tableDataStyle} key={index}>
@@ -24,6 +25,7 @@ export default function Table({ data }: { data: University[] }) {
       </thead>
       <tbody>
         {data?.map((dataRow) => {
+          // Remembering index is acting as key ID
           index += 1
           // Initialise empty object to store rows
           const tableRows: JSX.Element[] = []
@@ -56,6 +58,7 @@ export default function Table({ data }: { data: University[] }) {
               maxIndex < maxDomainsAndWebpagesLength;
               maxIndex++
             ) {
+              // index increases here to avoid conflicting key ids
               index += 1
               tableRows.push(
                 <tr className={tableRowStyle} key={index}>

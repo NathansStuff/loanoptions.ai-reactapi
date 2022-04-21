@@ -1,3 +1,4 @@
+import { University } from '../../types/types'
 import { SET_UNIVERSITIES, ADD_UNIVERSITY } from './university.types'
 
 // For first time loading
@@ -5,7 +6,12 @@ const INITIAL_STATE = {
   universities: [],
 }
 
-export function universityReducer(state = INITIAL_STATE, action) {
+interface Props {
+  type: string
+  payload: University | University[]
+}
+
+export function universityReducer(state = INITIAL_STATE, action: Props) {
   const { type, payload } = action
 
   switch (type) {
